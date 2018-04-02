@@ -79,7 +79,7 @@ func (g *Github) getSHA(repo, filename string) (string, error) {
 	owner, name := splitRepoName(repo)
 	fc, _, resp, err := g.client.Repositories.GetContents(context.Background(), owner, name, filename, nil)
 	if err != nil {
-		if resp.StatusCode == http.StatusNotFound {
+		if resp != nil && resp.StatusCode == http.StatusNotFound {
 			logrus.WithField("filename", filename).Info("file not found (unversioned)")
 			return "", nil
 		}
