@@ -56,18 +56,20 @@ var rootCmd = &cobra.Command{
 			}
 		}
 
-		ghOpts := github.GithubOptions{
-			APIHost:             ghHost,
-			PersonalAccessToken: ghToken,
-			RepositoryName:      ghRepo,
-			Filename:            ghFilename,
-			AuthorName:          ghAuthorName,
-			AuthorEmail:         ghAuthorEmail,
-		}
-		err = github.UpdateFile(b, &ghOpts)
-		if err != nil {
-			logrus.Error(err)
-			return
+		if ghRepo != "" {
+			ghOpts := github.GithubOptions{
+				APIHost:             ghHost,
+				PersonalAccessToken: ghToken,
+				RepositoryName:      ghRepo,
+				Filename:            ghFilename,
+				AuthorName:          ghAuthorName,
+				AuthorEmail:         ghAuthorEmail,
+			}
+			err = github.UpdateFile(b, &ghOpts)
+			if err != nil {
+				logrus.Error(err)
+				return
+			}
 		}
 	},
 }
@@ -79,8 +81,6 @@ func Execute() {
 	rootCmd.Flags().StringVar(&ghAuthorName, "author-name", "kibup@kibup.com", "github author name")
 	rootCmd.Flags().StringVar(&ghAuthorEmail, "author-email", "kibup", "github author email")
 	rootCmd.Flags().StringVar(&ghToken, "token", "", "github personal access token")
-	rootCmd.MarkFlagRequired("token")
-	rootCmd.MarkFlagRequired("repo")
 
 	rootCmd.Flags().StringVar(&esHost, "host", "http://127.0.0.1:9200", "elasticsearch host:port")
 	rootCmd.Flags().StringVar(&esIndex, "index", ".kibana", "kibana index name")
