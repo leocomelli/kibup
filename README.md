@@ -57,13 +57,13 @@ required flag(s) "repo", "token" not set
 ## Compatibility
 
 * GitHub API v3
-* Elasticsearch 5.x
+* Elasticsearch 6.x
 
 ## References
 
 * [GitHub API v3](https://developer.github.com/v3/)
 * [ GitHub Personal Access Token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
-* [Elasticsearch 5.x](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/index.html) 
+* [Elasticsearch 6.x](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index.html) 
 
 ## Contributing
 
