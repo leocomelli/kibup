@@ -24,6 +24,7 @@ var (
 	ghToken       string
 	ghHost        string
 	ghRepo        string
+	ghPath        string
 	ghFilename    string
 	ghAuthorName  string
 	ghAuthorEmail string
@@ -61,6 +62,7 @@ var rootCmd = &cobra.Command{
 				APIHost:             ghHost,
 				PersonalAccessToken: ghToken,
 				RepositoryName:      ghRepo,
+				Path:                ghPath,
 				Filename:            ghFilename,
 				AuthorName:          ghAuthorName,
 				AuthorEmail:         ghAuthorEmail,
@@ -78,6 +80,7 @@ func Execute() {
 	rootCmd.Flags().StringVar(&ghHost, "github", "https://api.github.com/", "github api url")
 	rootCmd.Flags().StringVar(&ghRepo, "repo", "", "repository name (owner/repo)")
 	rootCmd.Flags().StringVar(&ghFilename, "file", "kibana.json", "backup filename")
+	rootCmd.Flags().StringVar(&ghPath, "path", ".", "backup file location")
 	rootCmd.Flags().StringVar(&ghAuthorName, "author-name", "kibup@kibup.com", "github author name")
 	rootCmd.Flags().StringVar(&ghAuthorEmail, "author-email", "kibup", "github author email")
 	rootCmd.Flags().StringVar(&ghToken, "token", "", "github personal access token")

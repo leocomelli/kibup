@@ -28,6 +28,7 @@ type GithubOptions struct {
 	APIHost             string
 	PersonalAccessToken string
 	RepositoryName      string
+	Path                string
 	Filename            string
 	AuthorName          string
 	AuthorEmail         string
@@ -37,7 +38,8 @@ func UpdateFile(b []byte, opts *GithubOptions) error {
 
 	g := new(opts)
 
-	sha, err := g.getSHA(opts.RepositoryName, opts.Filename)
+	path := fmt.Sprintf("%s/%s", opts.Path, opts.Filename)
+	sha, err := g.getSHA(opts.RepositoryName, path)
 	if err != nil {
 		return err
 	}
@@ -53,7 +55,7 @@ func UpdateFile(b []byte, opts *GithubOptions) error {
 	}
 
 	owner, name := splitRepoName(opts.RepositoryName)
-	updateResponse, _, err := g.client.Repositories.UpdateFile(context.Background(), owner, name, opts.Filename, repositoryContentsOptions)
+	updateResponse, _, err := g.client.Repositories.UpdateFile(context.Background(), owner, name, path, repositoryContentsOptions)
 
 	logrus.WithField("filename", opts.Filename).WithField("commit", *updateResponse.Commit.SHA).
 		Info("file content has been updated successfully")
