@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/olivere/elastic"
 	"github.com/sirupsen/logrus"
-	elastic "gopkg.in/olivere/elastic.v5"
 )
 
 type ESQueryOptions struct {
