@@ -84,7 +84,7 @@ func Execute() {
 
 	rootCmd.Flags().StringVar(&esHost, "host", "http://127.0.0.1:9200", "elasticsearch host:port")
 	rootCmd.Flags().StringVar(&esIndex, "index", ".kibana", "kibana index name")
-	rootCmd.Flags().StringArrayVar(&esTypes, "types", []string{"dashboard", "visualization", "search"}, "kibana object types")
+	rootCmd.Flags().StringArrayVar(&esTypes, "types", []string{"dashboard", "visualization", "search", "config", "index-pattern"}, "kibana object types")
 	rootCmd.Flags().IntVar(&esSize, "size", 10000, "elastisearch query result size")
 	rootCmd.Flags().StringVar(&esSort, "sort", "_type", "field to sort the elasticsearch query")
 
