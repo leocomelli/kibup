@@ -28,9 +28,15 @@ func Query(opts *ESQueryOptions) ([]byte, error) {
 		return nil, err
 	}
 
+	var terms []elastic.Query
+
+	for _, t := range opts.Types {
+		terms = append(terms, elastic.NewTermQuery("type", t))
+	}
+
 	searchResult, err := client.Search().
 		Index(opts.Index).
-		Type(opts.Types...).
+		Query(elastic.NewBoolQuery().Should(terms...)).
 		Sort(opts.Sort, true).
 		From(0).Size(opts.Size).
 		Do(context.Background())
